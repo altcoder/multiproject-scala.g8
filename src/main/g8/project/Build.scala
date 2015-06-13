@@ -7,7 +7,7 @@ import AssemblyKeys._
 
 object Info {
   val name = "$name$"
-  val organization = "$orgnaization$"
+  val organization = "$organization$"
   val description = "$desc$"
   val url = "$url$"
 }
@@ -92,9 +92,9 @@ object $name;format="Camel"$Build extends Build {
     .settings(
       initialCommands in console:=
       """
-        import $package$.core._
-        import $package$.sample._
-        import $package$.benchmark._
+        import $organization$.core._
+        import $organization$.sample._
+        import $organization$.benchmark._
       """
     )
 
