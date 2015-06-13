@@ -109,14 +109,22 @@ lazy val sampleProj = (project in file("sample")).
   dependsOn(coreProj).
   settings(
     commonSettings,
-    name:= "Sample"
+    name:= "Sample",
+    libraryDependencies ++= Seq(
+      scalatest   % Test,
+      scalacheck  % Test
+    )
   )
 
 lazy val benchmarkProj = (project in utilPath / "benchmark").
   dependsOn(coreProj).
   settings(
     commonSettings,
-    name := "Bemnchmark"
+    name := "Bemnchmark",
+    libraryDependencies ++= Seq(
+      scalatest   % Test,
+      scalacheck  % Test
+    )
   )
 
 
