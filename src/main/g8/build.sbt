@@ -115,7 +115,7 @@ lazy val sampleProj = (project in file("sample")).
 lazy val benchmarkProj = (project in utilPath / "benchmark").
   dependsOn(coreProj).
   settings(
-    minimalSettings,
+    commonSettings,
     name := "Bemnchmark"
   )
 
