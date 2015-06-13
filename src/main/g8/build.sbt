@@ -75,21 +75,11 @@ def commonSettings: Seq[Setting[_]] = Seq(
   }
 )
 
-def minimalSettings: Seq[Setting[_]] =  commonSettings ++ customCommands 
-
-/**
-def baseSettings: Seq[Setting[_]] =
-  minimalSettings ++ Seq(projectComponent) ++ baseScalacOptions ++ Licensed.settings ++ Formatting.settings
-
-def testedBaseSettings: Seq[Setting[_]] =
-  baseSettings ++ testDependencies
-*/
-
 lazy val $name$Root: Project = (project in file(".")).
-  aggregate(nonRoots: _*).
+  aggregate(coreProj, sampleProj, benchmarkProj).
   settings(
     buildLevelSettings,
-    minimalSettings,
+    commonSettings,
     rootSettings,
     publish := {},
     publishLocal := {}
@@ -107,7 +97,7 @@ def rootSettings = Seq(
 
 lazy val coreProj = (project in file("core")).
   settings(
-    minimalSettings,
+    commonSettings,
     name := "Core",
     libraryDependencies ++= Seq(
       scalatest   % Test,
@@ -118,7 +108,7 @@ lazy val coreProj = (project in file("core")).
 lazy val sampleProj = (project in file("sample")).
   dependsOn(coreProj).
   settings(
-    minimalSettings,
+    commonSettings,
     name:= "Sample"
   )
 
@@ -130,73 +120,6 @@ lazy val benchmarkProj = (project in utilPath / "benchmark").
   )
 
 
-
-lazy val myProvided = config("provided") intransitive
-def allProjects = Seq(coreProj, sampleProj, benchmarkProj)
-def projectsWithMyProvided = allProjects.map(p => p.copy(configurations = (p.configurations.filter(_ != Provided)) :+ myProvided))
-lazy val nonRoots = projectsWithMyProvided.map(p => LocalProject(p.id))
-
-/* Nested Projproject paths */
-def corePath   = file("core")
+/* Nested project paths */
 def utilPath   = file("util")
-def samplePath = file("sample")
 
-
-lazy val safeUnitTests = taskKey[Unit]("Known working tests (for both 2.10 and 2.11)")
-lazy val safeProjects: ScopeFilter = ScopeFilter(
-  inProjects(coreProj, sampleProj, benchmarkProj),
-  inConfigurations(Test)
-)
-
-def customCommands: Seq[Setting[_]] = Seq(
-  commands += Command.command("setupBuildScala211") { state =>
-    s"""set scalaVersion in ThisBuild := "$scala211" """ ::
-      state
-  },
-  // This will be invoked by Travis
-  commands += Command.command("checkBuildScala211") { state =>
-    s"++ $scala211" ::
-      // First compile everything before attempting to test
-      "all compile test:compile" ::
-      // Now run known working tests.
-      safeUnitTests.key.label ::
-      state
-  },
-  safeUnitTests := {
-    test.all(safeProjects).value
-  },
-  commands += Command.command("release-local") { state =>
-    "clean" ::
-    "allPrecompiled/clean" ::
-    "allPrecompiled/compile" ::
-    "allPrecompiled/publishLocal" ::
-    "so compile" ::
-    "so publishLocal" ::
-    "reload" ::
-    state
-  },
-  commands += Command.command("release-public") { state =>
-    // TODO - Any sort of validation
-    "checkCredentials" ::
-    "clean" ::
-    "allPrecompiled/clean" ::
-      "allPrecompiled/compile" ::
-      "allPrecompiled/publishSigned" ::
-      "conscript-configs" ::
-      "so compile" ::
-      "so publishSigned" ::
-      "bundledLauncherProj/publishLauncher" ::
-      state
-  },
-  commands += Command.command("release-nightly") { state =>
-    "stamp-version" ::
-      "clean" ::
-      "allPrecompiled/clean" ::
-      "allPrecompiled/compile" ::
-      "allPrecompiled/publish" ::
-      "compile" ::
-      "publish" ::
-      "bintrayRelease" ::
-      state
-  }
-)
