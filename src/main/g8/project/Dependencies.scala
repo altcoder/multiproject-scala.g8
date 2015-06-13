@@ -15,5 +15,7 @@ object Dependencies {
   val logging       = "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
   val scalatest     = "org.scalatest"      %% "scalatest"   % "2.2.4" 
   val scalacheck    = "org.scalacheck"      %% "scalacheck"  % "1.12.3"
+  val spark         = "org.apache.spark"    %% "spark-core" % "0.8.0-incubating" % "provided"
+  val hadoop        = "org.apache.hadoop"   % "hadoop-client" % "2.0.0-cdh4.4.0" % "provided"
 }
 
