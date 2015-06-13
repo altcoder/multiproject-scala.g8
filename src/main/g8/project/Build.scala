@@ -7,7 +7,7 @@ import AssemblyKeys._
 
 object Info {
   val name = "$name$"
-  val package = "$package$"
+  val organization = "$orgnaization$"
   val description = "$desc$"
   val url = "$url$"
 }
@@ -22,7 +22,7 @@ object $name;format="Camel"$Build extends Build {
     version := Version.$name$,
     scalaVersion := Version.scala,
     crossScalaVersions := Seq("2.11.5", "2.10.5"),
-    organization := Info.package,
+    organization := Info.organization,
 
     // disable annoying warnings about 2.10.x
     conflictWarning in ThisBuild := ConflictWarning.disable,
@@ -35,7 +35,7 @@ object $name;format="Camel"$Build extends Build {
         "-language:higherKinds",
         "-language:postfixOps",
         "-language:existentials",
-        "-feature"),
+        "-feature")
 
     publishMavenStyle := true,
 
@@ -80,7 +80,6 @@ object $name;format="Camel"$Build extends Build {
         case "reference.conf" => MergeStrategy.concat
         case "application.conf" => MergeStrategy.concat
         case "META-INF/MANIFEST.MF" => MergeStrategy.discard
-        case "META-INF\\MANIFEST.MF" => MergeStrategy.discard
         case _ => MergeStrategy.first
       }
     },

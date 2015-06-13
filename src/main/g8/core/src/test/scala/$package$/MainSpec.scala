@@ -1,18 +1,11 @@
 package $package$
 
-import org.specs2.mutable._
+import org.scalatest.FunSpec
 
-class MainSpec extends Specification {
-
-  "The 'Hello world' string" should {
-    "contain 11 characters" in {
-      "Hello world" must have size(11)
-    }
-    "start with 'Hello'" in {
-      "Hello world" must startWith("Hello")
-    }
-    "end with 'world'" in {
-      "Hello world" must endWith("world")
+class HelloWorldSpec extends FunSpec {
+  describe("Adding 1 to 1") {
+    it("should equals 2"){
+      assert(1+1 == 2)
     }
   }
-} 
+}
