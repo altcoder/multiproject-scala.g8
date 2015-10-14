@@ -1,4 +1,5 @@
 import sbt._
+import Version._
 
 object Dependencies {
   val resolutionRepos = Seq(
@@ -6,9 +7,9 @@ object Dependencies {
     "Maven2 Dev Repository"     at "http://download.java.net/maven/2",
     "Typesafe Repository"       at "http://repo.typesafe.com/typesafe/releases/",
     "Sonatype Snapshots"        at "http://oss.sonatype.org/content/repositories/snapshots",
-    "Scalaz Bintray Repository" at "https://dl.bintray.com/scalaz/releases"
+    "Scalaz Bintray Repository" at "https://dl.bintray.com/scalaz/releases",
     "Akka Snapshot Repository"  at "http://repo.akka.io/snapshots/",
-    "NL4J Repository"           at "http://nativelibs4java.sourceforge.net/maven/",
+    "NL4J Repository"           at "http://nativelibs4java.sourceforge.net/maven/"
   )
 
   val typesafeConfig    = "com.typesafe"        % "config"        % "1.3.0"

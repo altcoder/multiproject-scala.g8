@@ -6,7 +6,7 @@ import Version._
 def buildLevelSettings: Seq[Setting[_]] = Seq(
   organization in ThisBuild := "$organization$",
   version in ThisBuild      := $name$V
-  shellPrompt in ThisBuild  := { state => Project.extract(state).currentRef.project + "> " },
+  shellPrompt in ThisBuild  := { state => Project.extract(state).currentRef.project + "> " }
 )
 
 def commonSettings: Seq[Setting[_]] = Seq(
@@ -49,8 +49,8 @@ def commonSettings: Seq[Setting[_]] = Seq(
   ),
   
   javacOptions in compile ++= Seq(
-    "-target", javaV, 
-    "-source", javaV, 
+    "-target", java8V, 
+    "-source", java8V, 
     "-Xlint", "-Xlint:-serial"),
   scalacOptions ++= Seq(
     "-deprecation",
