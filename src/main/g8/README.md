@@ -32,6 +32,13 @@ can be run using:
 Please see the guidance on how to
 [run tests for a module, or individual tests](https://cwiki.project.org/confluence/display/PROJECT/Useful+Developer+Tools).
 
+## Coding Style
+
+Refer to [Scala Style Guide](http://docs.scala-lang.org/style/) for project coding conventions. 
+To veriful code style, run:
+
+    ./sbt scalastyle
+
 ## Configuration
 
 Please refer to the [Configuration guide](http://project.org/docs/latest/configuration.html)

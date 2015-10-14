@@ -6,6 +6,7 @@ import Version._
 def buildLevelSettings: Seq[Setting[_]] = Seq(
   organization in ThisBuild := "$organization$",
   version in ThisBuild      := $name$V
+  shellPrompt in ThisBuild  := { state => Project.extract(state).currentRef.project + "> " },
 )
 
 def commonSettings: Seq[Setting[_]] = Seq(

@@ -7,6 +7,7 @@ object Environment {
   def either(environmentVariable: String, default: String): String =
     Properties.envOrElse(environmentVariable, default)
 
-  lazy val hadoopVersion  = either("SPARK_HADOOP_VERSION", "2.5.0")
-  lazy val sparkVersion   = either("SPARK_VERSION", "1.2.0")
+  lazy val hadoopVersion    = either("SPARK_HADOOP_VERSION", "2.6.1")
+  lazy val sparkVersion     = either("SPARK_VERSION", "1.5.1")
+  lazy val cassandraVersion = either("CASSANDRA_VERSION". "2.1.5")
 }
