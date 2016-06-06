@@ -1,3 +1,4 @@
+import Environment._
 import Dependencies._
 import Version._
 
@@ -19,6 +20,9 @@ def commonSettings: Seq[Setting[_]] = Seq(
   publishArtifact in packageDoc := false,
   publishArtifact in Test := false,
   publishMavenStyle := true,
+  credentials += Credentials(
+    "Sonatype Nexus Repository", "oss.sonatype.org",
+    publishUsername, publishPassword)
   publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository"))),
   /** For open source project
   publishTo := {
